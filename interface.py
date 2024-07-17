@@ -57,8 +57,8 @@ class Interface:
         tk.Entry(frame, textvariable=self.senha, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
         
         # Selecionar caminho do estilo
-        ttk.Label(frame, text="Caminho do estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=4, padx=10, pady=10, sticky="e")
-        ttk.Button(frame, text="Selecionar Pasta", command=self.abrir_pasta).grid(column=1, row=4, padx=20, pady=10, sticky="w")
+        ttk.Label(frame, text="Caminho do Estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=4, padx=10, pady=10, sticky="e")
+        ttk.Button(frame, text="Selecionar Estilo", command=self.abrir_pasta).grid(column=1, row=4, padx=20, pady=10, sticky="w")
 
         # Carregar a imagem do check
         self.checkmark_image = Image.open(r".\venv\check.png").resize((30, 30))
@@ -84,7 +84,7 @@ class Interface:
         
     # Função para abrir os seletores de pasta
     def abrir_pasta(self):
-        caminho = filedialog.askdirectory()
+        caminho = filedialog.askopenfilename()
         if caminho:
             self.pasta.set(caminho)
 
@@ -99,5 +99,4 @@ class Interface:
 
 
     def exibir_estilos(self):
-        resultado = criar_estilo(self.usuario.get(), self.senha.get())
-        self.exibir.config(text=resultado)
+        criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
