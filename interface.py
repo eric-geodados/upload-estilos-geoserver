@@ -50,11 +50,11 @@ class Interface:
 
         # Usuário
         ttk.Label(frame, text="Usuário do Geoserver:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
-        usuario_entrada = tk.Entry(frame, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=2, padx=20, pady=10, columnspan=2, sticky="w")
+        tk.Entry(frame, textvariable=self.usuario, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=2, padx=20, pady=10, columnspan=2, sticky="w")
 
         # Senha
         ttk.Label(frame, text="Senha:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=3, padx=10, pady=10, sticky="e")
-        senha_entrada = tk.Entry(frame, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
+        tk.Entry(frame, textvariable=self.senha, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
         
         # Selecionar caminho do estilo
         ttk.Label(frame, text="Caminho do estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=4, padx=10, pady=10, sticky="e")
@@ -67,12 +67,14 @@ class Interface:
         self.checkmark_label.grid(column=1, row=4, padx=20, pady=10, sticky="e")
 
         # Botão Criar
-        self.botao_criar = ttk.Button(frame, text="Criar", command=criar_estilo, padding=10)
+        self.botao_criar = ttk.Button(frame, text="Criar", command=self.exibir_estilos, padding=10)
         self.botao_criar.grid(column=0, row=5, sticky="ew", columnspan=2, padx=20, pady=10)
         self.botao_criar.config(state=tk.DISABLED)
 
-        ttk.Label(frame, text="", font=(self.fonte, 16), background="white", foreground="white").grid(column=0, row=6, padx=10, pady=10, columnspan=2)
 
+        self.exibir = ttk.Label(frame, text="TESTE", font=(self.fonte, 16), background="white", foreground="black")
+        self.exibir.grid(column=0, row=6, padx=10, pady=10, columnspan=2)
+        
         # Créditos ao Desenvolvedor
         ttk.Label(frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=7, padx=5, pady=10, sticky='w')
 
@@ -94,3 +96,8 @@ class Interface:
             self.checkmark_label.config(image=self.checkmark_photo)
         else:
             self.botao_criar.config(state=tk.DISABLED)
+
+
+    def exibir_estilos(self):
+        resultado = criar_estilo(self.usuario.get(), self.senha.get())
+        self.exibir.config(text=resultado)
