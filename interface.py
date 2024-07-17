@@ -63,8 +63,9 @@ class Interface:
         # Carregar a imagem do check
         self.checkmark_image = Image.open(r".\venv\check.png").resize((30, 30))
         self.checkmark_photo = ImageTk.PhotoImage(self.checkmark_image)
-        self.checkmark_label = ttk.Label(frame, image="", background=self.cor).grid(column=1, row=4, padx=20, pady=10, sticky="e")
-                
+        self.checkmark_label = ttk.Label(frame, background=self.cor)
+        self.checkmark_label.grid(column=1, row=4, padx=20, pady=10, sticky="e")
+
         # Botão Criar
         self.botao_criar = ttk.Button(frame, text="Criar", command=criar_estilo, padding=10)
         self.botao_criar.grid(column=0, row=5, sticky="ew", columnspan=2, padx=20, pady=10)
@@ -82,6 +83,8 @@ class Interface:
     # Função para abrir os seletores de pasta
     def abrir_pasta(self):
         caminho = filedialog.askdirectory()
+        if caminho:
+            self.pasta.set(caminho)
 
 
     # Função para desabilitar botão até selecionar pastas
