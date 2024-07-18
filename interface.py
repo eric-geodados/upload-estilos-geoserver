@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import filedialog
 import tkinter.font as tkFont
 from PIL import Image, ImageTk
-from upload_estilos import criar_estilo
+from estilos_geoserver import criar_estilo, listar_workspaces
 
 
 class Interface:
@@ -66,14 +66,18 @@ class Interface:
         self.checkmark_label = ttk.Label(frame, background=self.cor)
         self.checkmark_label.grid(column=1, row=4, padx=20, pady=10, sticky="e")
 
+        # Município
+        ttk.Label(frame, text="Município:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=5, padx=10, pady=10, sticky="e")
+        self.combobox = ttk.Combobox(frame, values=self.mostrar_workspaces, width=23)
+        self.combobox.grid(column=0, row=5, sticky="ew", columnspan=2, padx=20, pady=10)
+
         # Botão Criar
         self.botao_criar = ttk.Button(frame, text="Criar", command=self.exibir_estilos, padding=10)
-        self.botao_criar.grid(column=0, row=5, sticky="ew", columnspan=2, padx=20, pady=10)
+        self.botao_criar.grid(column=0, row=6, sticky="ew", columnspan=2, padx=20, pady=10)
         self.botao_criar.config(state=tk.DISABLED)
 
-
-        self.exibir = ttk.Label(frame, text="TESTE", font=(self.fonte, 16), background="white", foreground="black")
-        self.exibir.grid(column=0, row=6, padx=10, pady=10, columnspan=2)
+        # self.exibir = ttk.Label(frame, text="TESTE", font=(self.fonte, 16), background="white", foreground="black")
+        # self.exibir.grid(column=0, row=6, padx=10, pady=10, columnspan=2)
         
         # Créditos ao Desenvolvedor
         ttk.Label(frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=7, padx=5, pady=10, sticky='w')
@@ -91,7 +95,7 @@ class Interface:
 
     # Função para desabilitar botão até selecionar pastas
     def desabilitador_botao(self, *args):
-        if self.pasta.get().strip():
+        if self.pasta.get().strip() and self.usuario.get().strip() and self.senha.get().strip():
             self.botao_criar.config(state=tk.NORMAL)
             self.checkmark_label.config(image=self.checkmark_photo)
         else:
@@ -100,3 +104,7 @@ class Interface:
 
     def exibir_estilos(self):
         criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
+
+
+    def mostrar_workspaces(self):
+        listar_workspaces(self.usuario.get(), self.senha.get())
