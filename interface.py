@@ -146,12 +146,10 @@ class Interface:
             self.usuario_entrada.delete(0, tk.END)
             self.senha_entrada.delete(0, tk.END)
         else:
+            listar_workspaces(self.usuario.get(), self.senha.get())
             self.upload()
+
 
     def enviar_estilo(self):
         # criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
         return print("TESTE")
-
-
-    # def mostrar_workspaces(self):
-    #     listar_workspaces(self.usuario.get(), self.senha.get())
