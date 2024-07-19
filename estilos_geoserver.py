@@ -28,10 +28,13 @@ def listar_workspaces(usuario, senha):
     # Acessar os workspaces dentro da lista
     workspaces = response_json['workspaces']['workspace']
     
+    workspaces_excluir = ['cite', 'it.geosolutions', 'nurc', 'sde', 'sf', 'tiger', 'topp']
+    
     nomes_workspaces = []
     # Iterar sobre a lista de workspaces
     for workspace in workspaces:
-        nomes_workspaces.append(workspace['name'])
+        if workspace['name'] not in workspaces_excluir:
+            nomes_workspaces.append(workspace['name'])
     return nomes_workspaces
 
 

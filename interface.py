@@ -17,7 +17,7 @@ class Interface:
     def __init__(self):        
         self.janela = tk.Tk()
         self.janela.title("CRIADOR DE ESTILOS GEOSERVER")
-        self.janela.geometry("600x350")
+        self.janela.geometry("550x350")
         self.janela.configure(bg=self.cor)
         
         # Configurar a grade da janela principal para centralizar o frame
@@ -58,7 +58,8 @@ class Interface:
         
         
         ttk.Label(self.login_frame, text="CRIADOR DE ESTILOS GEOSERVER", font=self.fonte_titulos, background=self.cor, foreground="white").grid(column=0, row=0, padx=10, pady=5, columnspan=2)
-        
+        ttk.Label(self.login_frame, text="――――――――――――――――――――――――――――――――――――――――――", font=(self.fonte, 8), background=self.cor, foreground="white").grid(column=0, row=1, padx=10, pady=5, columnspan=2)
+
         # Usuário
         ttk.Label(self.login_frame, text="Usuário do GeoServer:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
         self.usuario_entrada = tk.Entry(self.login_frame, textvariable=self.usuario, font=(self.fonte, 12), background="white", width=23)
@@ -89,7 +90,8 @@ class Interface:
         self.pasta.trace("w", self.desabilitador_botao_criar)  # Monitora alterações no StringVar
         
         
-        ttk.Label(self.upload_frame, text="CRIADOR DE ESTILOS GEOSERVER", font=self.fonte_titulos, background=self.cor, foreground="white").grid(column=0, row=1, padx=10, pady=5, columnspan=2)
+        ttk.Label(self.upload_frame, text="CRIADOR DE ESTILOS GEOSERVER", font=self.fonte_titulos, background=self.cor, foreground="white").grid(column=0, row=0, padx=10, pady=5, columnspan=2)
+        ttk.Label(self.upload_frame, text="――――――――――――――――――――――――――――――――――――――――――", font=(self.fonte, 8), background=self.cor, foreground="white").grid(column=0, row=1, padx=10, pady=5, columnspan=2)
         
         # Selecionar caminho do estilo
         ttk.Label(self.upload_frame, text="Caminho do Estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
@@ -161,4 +163,4 @@ class Interface:
 
     def enviar_estilo(self):
         criar_estilo(self.usuario.get(), self.senha.get(), self.combobox.get(), self.pasta.get())
-        messagebox.showinfo('STATUS DE PROCESSAMENTO', '☑ Estilo criado e carregado com sucesso ao GeoServer!')
+        messagebox.showinfo('STATUS DE PROCESSAMENTO', '✓ Estilo criado e carregado com sucesso ao GeoServer!')
