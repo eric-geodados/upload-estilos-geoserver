@@ -50,8 +50,3 @@ def criar_estilo(usuario, senha, workspace, caminho_arquivo):
         response = requests.post(url, headers=header, data=arquivo, auth=HTTPBasicAuth(usuario, senha))
 
     print(response.status_code)
-    # # Verificando a resposta
-    # if response.status_code == 201:
-    #     return messagebox.showinfo('STATUS DE PROCESSAMENTO', 'Estilo criado e carregado com sucesso ao GeoServer')
-    # else:
-    #     return (f'Erro ao carregar estilo: {response.status_code}', response.text)

@@ -70,10 +70,11 @@ class Interface:
         self.senha_entrada.grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
 
         # Botão de login
-        self.botao_logar = ttk.Button(self.login_frame, text="Logar", command=self.logar_para_upload, padding=10)
+        self.botao_logar = ttk.Button(self.login_frame, text="Logar", command=self.ao_clicar_botao_logar, padding=10)
         self.botao_logar.grid(column=0, row=4, sticky="ew", columnspan=2, padx=20, pady=10)
         self.botao_logar.config(state=tk.DISABLED)
-
+        self.janela.bind('<Return>', self.ao_clicar_botao_logar)
+        
         # Créditos ao Desenvolvedor
         ttk.Label(self.login_frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=5, padx=5, pady=10, sticky='w')
 
@@ -106,9 +107,10 @@ class Interface:
         self.combobox.grid(column=1, row=3, sticky="w", columnspan=2, padx=20, pady=10)
 
         # Botão criar
-        self.botao_criar = ttk.Button(self.upload_frame, text="Enviar", command=self.enviar_estilo, padding=10)
+        self.botao_criar = ttk.Button(self.upload_frame, text="Enviar", command=self.ao_clicar_botao_criar, padding=10)
         self.botao_criar.grid(column=0, row=4, sticky="ew", columnspan=3, padx=20, pady=10)
         self.botao_criar.config(state=tk.DISABLED)
+        self.janela.bind('<Return>', self.ao_clicar_botao_criar)
 
         # Créditos ao Desenvolvedor
         ttk.Label(self.upload_frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=5, padx=5, pady=10, sticky='w')
@@ -140,6 +142,14 @@ class Interface:
             self.botao_criar.config(state=tk.DISABLED)
 
 
+    def ao_clicar_botao_logar(self, event=None):
+        self.logar_para_upload()
+
+
+    def ao_clicar_botao_criar(self, event=None):
+        self.enviar_estilo()
+
+
     def logar_para_upload(self):
         if not validar_login(self.usuario.get(), self.senha.get()):
             messagebox.showwarning('FALHA NO LOGIN', 'Usuário ou senha inválidos!')
@@ -151,3 +161,4 @@ class Interface:
 
     def enviar_estilo(self):
         criar_estilo(self.usuario.get(), self.senha.get(), self.combobox.get(), self.pasta.get())
+        messagebox.showinfo('STATUS DE PROCESSAMENTO', '☑ Estilo criado e carregado com sucesso ao GeoServer!')
