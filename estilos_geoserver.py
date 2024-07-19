@@ -53,3 +53,7 @@ def criar_estilo(usuario, senha, workspace, caminho_arquivo):
         response = requests.post(url, headers=header, data=arquivo, auth=HTTPBasicAuth(usuario, senha))
 
     print(response.status_code)
+    if response.status_code == 201:
+        return True
+    else:
+        return False
