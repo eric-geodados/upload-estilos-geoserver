@@ -60,7 +60,7 @@ class Interface:
         ttk.Label(self.login_frame, text="CRIADOR DE ESTILOS GEOSERVER", font=self.fonte_titulos, background=self.cor, foreground="white").grid(column=0, row=0, padx=10, pady=5, columnspan=2)
         
         # Usuário
-        ttk.Label(self.login_frame, text="Usuário do Geoserver:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
+        ttk.Label(self.login_frame, text="Usuário do GeoServer:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
         self.usuario_entrada = tk.Entry(self.login_frame, textvariable=self.usuario, font=(self.fonte, 12), background="white", width=23)
         self.usuario_entrada.grid(column=1, row=2, padx=20, pady=10, columnspan=2, sticky="w")
 
@@ -102,7 +102,7 @@ class Interface:
 
         # Município
         ttk.Label(self.upload_frame, text="Município:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=3, padx=10, pady=10, sticky="e")
-        self.combobox = ttk.Combobox(self.upload_frame, values="", width=25)
+        self.combobox = ttk.Combobox(self.upload_frame, values=listar_workspaces(self.usuario.get(), self.senha.get()), width=25)
         self.combobox.grid(column=1, row=3, sticky="w", columnspan=2, padx=20, pady=10)
 
         # Botão criar
@@ -146,10 +146,8 @@ class Interface:
             self.usuario_entrada.delete(0, tk.END)
             self.senha_entrada.delete(0, tk.END)
         else:
-            listar_workspaces(self.usuario.get(), self.senha.get())
             self.upload()
 
 
     def enviar_estilo(self):
-        # criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
-        return print("TESTE")
+        criar_estilo(self.usuario.get(), self.senha.get(), self.combobox.get(), self.pasta.get())

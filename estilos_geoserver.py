@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from config import GEOSERVER_URL
 import json
+from tkinter import messagebox
 
 
 def validar_login(usuario, senha):
@@ -9,7 +10,6 @@ def validar_login(usuario, senha):
 
     response = requests.get(url, auth=HTTPBasicAuth(usuario, senha))
     
-    print(response.status_code)
     if response.status_code == 200:
         return True
     else:
@@ -51,6 +51,6 @@ def criar_estilo(usuario, senha, workspace, caminho_arquivo):
 
     # Verificando a resposta
     if response.status_code == 201:
-        return 'Estilo carregado com sucesso!'
+        return messagebox.showinfo('STATUS DE PROCESSAMENTO', 'Estilo criado e carregado com sucesso ao GeoServer')
     else:
         return (f'Erro ao carregar estilo: {response.status_code}', response.text)
