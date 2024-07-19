@@ -54,7 +54,7 @@ class Interface:
 
         # Senha
         ttk.Label(frame, text="Senha:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=3, padx=10, pady=10, sticky="e")
-        tk.Entry(frame, textvariable=self.senha, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
+        tk.Entry(frame, textvariable=self.senha, show="*", font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
         
         # Selecionar caminho do estilo
         ttk.Label(frame, text="Caminho do Estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=4, padx=10, pady=10, sticky="e")
@@ -68,16 +68,13 @@ class Interface:
 
         # Município
         ttk.Label(frame, text="Município:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=5, padx=10, pady=10, sticky="e")
-        self.combobox = ttk.Combobox(frame, values=self.mostrar_workspaces, width=23)
+        self.combobox = ttk.Combobox(frame, values="", width=23)
         self.combobox.grid(column=0, row=5, sticky="ew", columnspan=2, padx=20, pady=10)
 
         # Botão Criar
-        self.botao_criar = ttk.Button(frame, text="Criar", command=self.exibir_estilos, padding=10)
+        self.botao_criar = ttk.Button(frame, text="Logar", command=self.exibir_estilos, padding=10)
         self.botao_criar.grid(column=0, row=6, sticky="ew", columnspan=2, padx=20, pady=10)
         self.botao_criar.config(state=tk.DISABLED)
-
-        # self.exibir = ttk.Label(frame, text="TESTE", font=(self.fonte, 16), background="white", foreground="black")
-        # self.exibir.grid(column=0, row=6, padx=10, pady=10, columnspan=2)
         
         # Créditos ao Desenvolvedor
         ttk.Label(frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=7, padx=5, pady=10, sticky='w')
@@ -106,5 +103,5 @@ class Interface:
         criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
 
 
-    def mostrar_workspaces(self):
-        listar_workspaces(self.usuario.get(), self.senha.get())
+    # def mostrar_workspaces(self):
+    #     listar_workspaces(self.usuario.get(), self.senha.get())
