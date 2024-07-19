@@ -92,7 +92,7 @@ class Interface:
         
         # Selecionar caminho do estilo
         ttk.Label(self.upload_frame, text="Caminho do Estilo:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
-        ttk.Button(self.upload_frame, text="Selecionar", command=self.abrir_pasta).grid(column=1, row=2, padx=20, pady=10, sticky="w")
+        ttk.Button(self.upload_frame, text="Selecionar (.ZIP)", command=self.abrir_pasta).grid(column=1, row=2, padx=20, pady=10, sticky="w")
 
         # Carregar a imagem do check
         self.checkmark_image = Image.open(r".\venv\check.png").resize((30, 30))
@@ -102,7 +102,7 @@ class Interface:
 
         # Município
         ttk.Label(self.upload_frame, text="Município:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=3, padx=10, pady=10, sticky="e")
-        self.combobox = ttk.Combobox(self.upload_frame, values=listar_workspaces(self.usuario.get(), self.senha.get()), width=25)
+        self.combobox = ttk.Combobox(self.upload_frame, font=(self.fonte, 10), values=listar_workspaces(self.usuario.get(), self.senha.get()), width=25)
         self.combobox.grid(column=1, row=3, sticky="w", columnspan=2, padx=20, pady=10)
 
         # Botão criar
@@ -119,7 +119,7 @@ class Interface:
 
     # Função para abrir os seletores de pasta
     def abrir_pasta(self):
-        caminho = filedialog.askopenfilename()
+        caminho = filedialog.askopenfilename(filetypes=[("Arquivos ZIP", "*.zip")])
         if caminho:
             self.pasta.set(caminho)
 
