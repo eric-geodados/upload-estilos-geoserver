@@ -4,6 +4,18 @@ from config import GEOSERVER_URL
 import json
 
 
+def validar_login(usuario, senha):
+    url = f"{GEOSERVER_URL}/rest/workspaces/"
+
+    response = requests.get(url, auth=HTTPBasicAuth(usuario, senha))
+    
+    print(response.status_code)
+    if response.status_code == 200:
+        return True
+    else:
+        return False
+    
+
 def listar_workspaces(usuario, senha):
     # URL do recurso com o workspace
     url = f"{GEOSERVER_URL}/rest/workspaces/"
@@ -42,8 +54,3 @@ def criar_estilo(usuario, senha, workspace, caminho_arquivo):
         return 'Estilo carregado com sucesso!'
     else:
         return (f'Erro ao carregar estilo: {response.status_code}', response.text)
-
-# c = r'C:\Users\eric_cabral\Downloads\obras_publicas.zip'
-# workspace = 'UbaC4764'
-# final = criar_estilo('admin', 'geodados', workspace, c)
-# print(final)

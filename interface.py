@@ -3,7 +3,8 @@ from tkinter import ttk
 from tkinter import filedialog
 import tkinter.font as tkFont
 from PIL import Image, ImageTk
-from estilos_geoserver import criar_estilo, listar_workspaces
+from estilos_geoserver import criar_estilo, listar_workspaces, validar_login
+from tkinter import messagebox
 
 
 class Interface:
@@ -60,12 +61,14 @@ class Interface:
         
         # Usuário
         ttk.Label(self.login_frame, text="Usuário do Geoserver:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=2, padx=10, pady=10, sticky="e")
-        tk.Entry(self.login_frame, textvariable=self.usuario, font=(self.fonte, 12), background="white", width=23).grid(column=1, row=2, padx=20, pady=10, columnspan=2, sticky="w")
+        self.usuario_entrada = tk.Entry(self.login_frame, textvariable=self.usuario, font=(self.fonte, 12), background="white", width=23)
+        self.usuario_entrada.grid(column=1, row=2, padx=20, pady=10, columnspan=2, sticky="w")
 
         # Senha
         ttk.Label(self.login_frame, text="Senha:", font=(self.fonte, 16), background=self.cor, foreground="white").grid(column=0, row=3, padx=10, pady=10, sticky="e")
-        tk.Entry(self.login_frame, textvariable=self.senha, show="*",font=(self.fonte, 12), background="white", width=23).grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
-        
+        self.senha_entrada = tk.Entry(self.login_frame, textvariable=self.senha, show="*",font=(self.fonte, 12), background="white", width=23)
+        self.senha_entrada.grid(column=1, row=3, padx=20, pady=10, columnspan=2, sticky="w")
+
         # Botão de login
         self.botao_logar = ttk.Button(self.login_frame, text="Logar", command=self.logar_para_upload, padding=10)
         self.botao_logar.grid(column=0, row=4, sticky="ew", columnspan=2, padx=20, pady=10)
@@ -73,10 +76,10 @@ class Interface:
 
         # Créditos ao Desenvolvedor
         ttk.Label(self.login_frame, text="2024 © Desenvolvido por Eric Cabral", font=('Segoe UI', 10), background=self.cor, foreground="white").grid(column=0, row=5, padx=5, pady=10, sticky='w')
-        
+
         # Mostrar o frame de login centralizado
         self.login_frame.grid(row=1, column=1, sticky="nsew")
-     
+
     def upload(self):
         self.login_frame.grid_forget()
         
@@ -138,7 +141,12 @@ class Interface:
 
 
     def logar_para_upload(self):
-        self.upload()
+        if not validar_login(self.usuario.get(), self.senha.get()):
+            messagebox.showwarning('FALHA NO LOGIN', 'Usuário ou senha inválidos!')
+            self.usuario_entrada.delete(0, tk.END)
+            self.senha_entrada.delete(0, tk.END)
+        else:
+            self.upload()
 
     def enviar_estilo(self):
         # criar_estilo(self.usuario.get(), self.senha.get(), self.pasta.get())
