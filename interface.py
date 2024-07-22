@@ -5,18 +5,20 @@ import tkinter.font as tkFont
 from PIL import Image, ImageTk
 from estilos_geoserver import criar_estilo, listar_workspaces, validar_login
 from tkinter import messagebox
+import os
+import sys
 
 
 class Interface:
 
     cor = "#13191C"
-    cor_botoes = "#00ABD1"
+    cor_botoes = "#6BD3C0"
     fonte = "Segoe UI"
 
     # Configurações da self.janela principal
     def __init__(self):        
         self.janela = tk.Tk()
-        self.janela.title("CRIADOR DE ESTILOS GEOSERVER")
+        self.janela.title("Criador de Estilos Geoserver - 1.0.0")
         self.janela.geometry("550x350")
         self.janela.configure(bg=self.cor)
         
@@ -32,8 +34,8 @@ class Interface:
 
         style = ttk.Style()
         style.theme_use("clam")
-        style.configure("TButton", font=self.fonte_padrao, background=self.cor_botoes, foreground="white", padding=3)
-        style.map("TButton", background=[("active", "#008CAB")])
+        style.configure("TButton", font=self.fonte_padrao, background=self.cor_botoes, foreground="#202020", padding=3)
+        style.map("TButton", background=[("active", "#96DED1")])
 
         # Frame principal com cor de fundo
         self.login_frame = ttk.Frame(self.janela, padding="20", style="Custom.TFrame")
@@ -98,7 +100,12 @@ class Interface:
         ttk.Button(self.upload_frame, text="Selecionar (.ZIP)", command=self.abrir_pasta).grid(column=1, row=2, padx=20, pady=5, sticky="w")
 
         # Carregar a imagem do check
-        self.checkmark_image = Image.open(r".\venv\check.png").resize((30, 30))
+        if getattr(sys, 'frozen', False):
+            caminho_imagem = sys._MEIPASS
+        else:
+            caminho_imagem = os.path.dirname(__file__)
+        check = os.path.join(caminho_imagem, 'assets', 'check.png')
+        self.checkmark_image = Image.open(check).resize((30, 30))
         self.checkmark_photo = ImageTk.PhotoImage(self.checkmark_image)
         self.checkmark_label = ttk.Label(self.upload_frame, background=self.cor)
         self.checkmark_label.grid(column=1, row=2, padx=15, pady=5, sticky="e")
