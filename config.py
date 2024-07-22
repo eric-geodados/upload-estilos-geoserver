@@ -1,2 +1,2 @@
 # Configurações do GeoServer
-GEOSERVER_URL = "http://x-portilho:8081/geoserver_v2.20"
+GEOSERVER_URL = "http://52.67.139.228:8080/geoserver"

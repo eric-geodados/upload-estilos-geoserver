@@ -14,7 +14,7 @@ def validar_login(usuario, senha):
         return True
     else:
         return False
-    
+
 
 def listar_workspaces(usuario, senha):
     # URL do recurso com o workspace
