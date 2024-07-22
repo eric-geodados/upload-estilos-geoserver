@@ -173,4 +173,5 @@ class Interface:
         self.mensagem_continuar_envio = messagebox.askyesno("CONFIRMAÇÃO", "Você deseja enviar outro estilo?")
         if self.mensagem_continuar_envio:
             self.upload()
-        self.janela.destroy()
+        else:
+            self.janela.destroy()
